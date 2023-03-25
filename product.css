@@ -63,23 +63,19 @@
   background-color: #e5e5e5;
 }
 
-.sujin {
+.headshots {
   float: left;
   margin-right: 50px; /* adjust this to your liking */
 }
 
-.introductions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.introductions .col-lg-4 {
-  margin-right: 20px;
-}
-
 .row mt-3{
   float: right;
+}
+
+.col-lg-8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /*
