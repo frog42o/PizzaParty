@@ -1,0 +1,19 @@
+body{
+    background: white;
+}
+#dashboard {
+    outline: auto;
+    background: grey;
+    width: 30%;
+    text-align: center;
+    font-size: 32px;
+}
+
+#parent{
+    text-align: right;
+}
+#child{
+    display: inline-block;
+    vertical-align: middle;
+
+}
