@@ -19,9 +19,13 @@
         $query    = "SELECT * FROM `userdata` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
+        $userdata = mysqli_fetch_array($result);
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
             $_SESSION['username'] = $username;
+            $_SESSION['firstname'] = $userdata['firstname'];
+            $_SESSION['lastname'] = $userdata['lastname'];
+            $_SESSION['grade'] = $userdata['grade'];
             // Redirect to user dashboard page
             header("Location: dashboard.php");
         } 

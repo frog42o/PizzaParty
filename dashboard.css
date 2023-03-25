@@ -9,11 +9,9 @@ body{
     font-size: 32px;
 }
 
-#parent{
+#buttons{
     text-align: right;
 }
-#child{
+#join_class{
     display: inline-block;
-    vertical-align: middle;
-
 }
