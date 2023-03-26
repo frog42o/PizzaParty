@@ -10,8 +10,10 @@ include("allow_session.php");
 </head>
 <body>
 <div class="form" >
-    <a href= "classes/createClass.php"><button>Create a Class</button></a>
-    <a href = "classes/joinClass.php"> <button>Join a Class</button></a>
+    <h1 class="post-title">Select An Option:</h1>
+    <a href= "classes/createClass.php"><button class = "login-button">Create a Class</button></a>
+    <a href = "classes/joinClass.php"> <button class = "login-button">Join a Class</button></a>
+    <p class='link'>Return to <a href='dashboard.php'>Dashboard</a></p>
 </div>
 </body>
 </html>

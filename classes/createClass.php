@@ -46,12 +46,12 @@ include("../allow_session.php");
                     $classname = stripslashes($_REQUEST['classname']);
                     $classname = mysqli_real_escape_string($con, $classname);
 
-                    $teacher = $_SESSION['username'];
+                    $teacher = $_SESSION['firstname']. " ". $_SESSION['lastname'];
 
                     $courseCode = random(9);
                     $progressGoal = 1000;
 
-                    $query    = "INSERT into `classdata` (classname, teacher , classcode, progressgoal)
+                    $query = "INSERT into `classdata` (classname, teacher , classcode, progressgoal)
                      VALUES ('$classname', '$teacher', '$courseCode', '$progressGoal')";
                     $duplicate = mysqli_query($con, "SELECT * from classdata WHERE classname = '$classname'");
                     if (mysqli_num_rows($duplicate)>0){
@@ -62,11 +62,24 @@ include("../allow_session.php");
                     } else{
                     $result = mysqli_query($con, $query);
                     if ($result) {
-                        echo "<div class='form'>
-                              <h3>You have successfully created the class!</h3><br/>
-                              <p class='link'>Click here to return to <a href='../dashboard.php'>Dashboard</a></p>
-                              </div>";
-                    } 
+                        $username = $data['username'];
+                        if(empty($data['enrolled'])){
+                            $enroll_query= "UPDATE userdata SET enrolled = CONCAT('$classname', enrolled ) WHERE username = '$username'";
+                        }else{
+                            $enroll_query= "UPDATE userdata SET enrolled = CONCAT('$classname', ',',enrolled ) WHERE username = '$username'";
+                        }
+                        $enroll_result = mysqli_query($con, $enroll_query);
+                        if($enroll_result){
+                            echo "<div class='form'>
+                                <h3>You have successfully created the class! Here is your class code:
+                                </h3>";
+                            echo "<p style = 'text-align: center;'><b>$courseCode</b></p>" ;          
+                            echo "<p class='link'>Click here to return to <a href='../dashboard.php'>Dashboard</a></p>
+                                </div>";
+                        } else{
+                            echo "enroll error";
+                        }
+                    }
                     else {
                         echo "<div class='form'>
                               <h3>Required fields are missing.</h3><br/>
@@ -83,7 +96,7 @@ include("../allow_session.php");
         <h1 class="post-title">Create a Class</h1>
         <input type="text" class="post-input" name="classname" placeholder="Class Name" autofocus="true"/>
         <input type="submit" value="Create" name="submit" class="login-button"/>
-        <p class="link"><a href="../dashboard.php">Return Back</a></p>
+        <p class="link"><a href="../joinCreateClass.php">Return Back</a></p>
   </form>
 <?php
     }
